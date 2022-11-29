@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 
 const routerProductos = Router();
 const productos = [
@@ -24,8 +24,9 @@ const productos = [
 
 routerProductos.route("/").get((req,res)=>{
     const response = {
-        data: productos
+        data: productos,
     }
+    response.json(response);
 })
 .post((req,res) =>{
     const {id} = req.params;
