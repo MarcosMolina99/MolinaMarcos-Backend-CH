@@ -1,4 +1,4 @@
-import express, {JSON, urlencoded} from "express";
+import express, {json, urlencoded} from "express";
 import routerProductos from "./src/productos.route.js";
 import {fileURLToPath} from "url";
 import { dirname, join } from "path";
@@ -15,16 +15,16 @@ app.use(express.urlencoded({extended: true}));
 app.use("/api/productos", routerProductos);
 
 app.get("/", (req,res)=>{
-    res.render("form");
+    res.render("form.hbs");
 })
 
 app.engine(
     "hbs",
     engine({
         extname: ".hbs",
-        defaultLayout: join(__dirname, "public/views/layouts/main.hbs"),
-        layoutsDir: join(__dirname, "public/views/layouts"),
-        partialsDir: join(__dirname, "public/views/partials"),
+        defaultLayout: join(__dirname, "public/layouts/main.hbs"),
+        layoutsDir: join(__dirname, "public/form.hbs"),
+        partialsDir: join(__dirname, "public/showProduct.hbs"),
     })
 )
 

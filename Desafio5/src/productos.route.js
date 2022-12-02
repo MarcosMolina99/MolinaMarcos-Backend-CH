@@ -51,7 +51,7 @@ routerProductos.route("/:id").put((req,res) =>{
     const statusCode = product ? 200 : 404;
 
     res.status(statusCode).json(response);
-}).delete("/:id",(req,res) =>{
+}).delete("",(req,res) =>{
     const {id} = req.params;
     const {name,price,type} = req.body;
     const indexProductToUpdate = productos.find((product) => product.id === Number(id));
