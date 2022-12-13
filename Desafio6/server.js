@@ -20,14 +20,14 @@ const products = [];
 const messages= [];
 
 app.get("/", (req,res)=>{
-    res.render("form.hbs");
+    res.render("./public/views/form.hbs");
 })
 
 app.engine(
     "hbs",
     engine({
         extname: ".hbs",
-        defaultLayout: join(__dirname, "public/layouts/main.hbs"),
+        defaultLayout: join(__dirname, "./public/layout/main.hbs"),
         layoutsDir: join(__dirname, "./public/"),
         partialsDir: join(__dirname, "./public/partials"),
     })
