@@ -1,10 +1,10 @@
 import express, {json, urlencoded} from "express";
 import routerProductos from "./src/productos.route.js";
 import {fileURLToPath} from "url";
-import { dirname, join } from "path";
+import path, { dirname, join } from "path";
 import { engine } from "express-handlebars";
-import { Socket } from "socket.io";
 import { Server as IOServer } from "socket.io";
+import knex from "knex";
 // const socket = io();
 // import { json } from "express";
 
@@ -20,14 +20,15 @@ const products = [];
 const messages= [];
 
 app.get("/", (req,res)=>{
-    res.render("./public/views/form.hbs");
+    // res.render("./public/form.hbs");
+    res.render(join(__dirname, "./public/form.hbs"));
 })
 
 app.engine(
     "hbs",
     engine({
         extname: ".hbs",
-        defaultLayout: join(__dirname, "./public/layout/main.hbs"),
+        defaultLayout: join(__dirname, "./public/layouts/main.hbs"),
         layoutsDir: join(__dirname, "./public/"),
         partialsDir: join(__dirname, "./public/partials"),
     })
@@ -63,3 +64,12 @@ io.on("connection", (socket) =>{
     });
 })
 
+const config = {
+    client: "sqlite3",
+    connection: {fileName: path.resolve(__dirname, "./database/coder.sqlite")},
+    useNullAsDefault: true,
+}
+
+const database = knex(config);
+
+export default database;

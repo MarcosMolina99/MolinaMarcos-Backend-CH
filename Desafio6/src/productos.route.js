@@ -1,4 +1,5 @@
 import { response, Router } from "express";
+import database from "../server";
 
 const routerProductos = Router();
 const productos = [
@@ -21,6 +22,16 @@ const productos = [
         type: "Ropa"
     }
 ];
+
+async function save(name, price, title) {
+    try{
+        const newProduct = await database("product").insert({name,price, title})
+        return newProduct;
+    }
+    catch{
+
+    }
+}
 
 routerProductos.route("/").get((req,res)=>{
     const response = {
