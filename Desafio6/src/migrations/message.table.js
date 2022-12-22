@@ -19,8 +19,11 @@ const createMessageTable = async () =>{
             messageTable.string("time", 250).notNullable();
         })
         console.log("Tabla de mensajes creada");
+        database.destroy()
     }
     catch{
         console.log(err);
     }
 }
+
+createMessageTable();
